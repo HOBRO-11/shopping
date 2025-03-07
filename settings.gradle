@@ -1,1 +1,5 @@
 rootProject.name = 'shopping'
+
+include 'modules:product'
+include 'modules:orders'
+include 'modules:management'
