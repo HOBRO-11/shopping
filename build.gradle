@@ -17,6 +17,10 @@ allprojects{
     repositories {
         mavenCentral()
     }
+
+    dependencies {
+    
+    }
 }
 
 subprojects{
@@ -28,6 +32,12 @@ subprojects{
 
     dependencies {
 	    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+        // lombok
+	    compileOnly 'org.projectlombok:lombok:1.18.34'
+	    annotationProcessor 'org.projectlombok:lombok:1.18.34'
+	    testCompileOnly 'org.projectlombok:lombok:1.18.34'
+	    testAnnotationProcessor 'org.projectlombok:lombok:1.18.34'
     }
 }
 
