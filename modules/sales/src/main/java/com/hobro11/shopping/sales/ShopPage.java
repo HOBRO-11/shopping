@@ -7,7 +7,10 @@ import java.util.List;
 
 import org.locationtech.jts.geom.Point;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -27,7 +30,7 @@ import lombok.ToString;
 @Entity
 @Getter
 @ToString
-@Table(name = "salePage", uniqueConstraints = @UniqueConstraint(columnNames = "title"))
+@Table(name = "shopPage", uniqueConstraints = @UniqueConstraint(columnNames = "title"))
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @EqualsAndHashCode
 public class ShopPage {
@@ -48,9 +51,11 @@ public class ShopPage {
     private String description;
 
     @Setter
+    @Enumerated(EnumType.STRING)
     private ShopPageStatue status;
 
     @Setter
+    @Column(nullable = false, columnDefinition = "geometry(Point, 4326)")
     private Point location;
 
     private LocalDateTime createdAt;

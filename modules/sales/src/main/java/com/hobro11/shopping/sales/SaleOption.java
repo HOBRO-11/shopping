@@ -3,6 +3,8 @@ package com.hobro11.shopping.sales;
 import java.time.LocalDateTime;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -15,6 +17,7 @@ import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 
 @Entity
@@ -36,6 +39,8 @@ public class SaleOption {
 
     private String description;
 
+    @Setter
+    @Enumerated(EnumType.STRING)
     private SaleOptionStatus status;
     
     private Integer price;

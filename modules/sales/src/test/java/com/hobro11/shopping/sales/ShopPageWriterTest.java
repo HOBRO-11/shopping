@@ -19,7 +19,7 @@ import com.hobro11.shopping.sales.service.dto.ShopPageCreateDto;
 
 
 @Transactional
-@SpringBootTest(classes = SalesTestConfig.class)
+@SpringBootTest(classes = SalesPostgreSqlTestConfig.class)
 public class ShopPageWriterTest {
 
     @Autowired

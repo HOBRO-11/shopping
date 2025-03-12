@@ -2,6 +2,7 @@
 package com.hobro11.shopping.sales.service;
 
 import com.hobro11.shopping.sales.SaleOption;
+import com.hobro11.shopping.sales.SaleOptionStatus;
 import com.hobro11.shopping.sales.ShopPage;
 import com.hobro11.shopping.sales.exception.SaleOptionNotFoundException;
 import com.hobro11.shopping.sales.exception.SaleOptionUniqueNameException;
@@ -37,6 +38,13 @@ public class SaleOptionWriterV1 implements SaleOptionWriter {
                 .ifPresent(so -> {
                     throw new SaleOptionUniqueNameException();
                 });
+    }
+
+    @Override
+    public void updateStatus(Long id, SaleOptionStatus status) {
+        SaleOption saleOption = findSaleOptionById(id);
+        saleOption.setStatus(status);
+        saleOptionRepo.save(saleOption);
     }
 
     @Override
