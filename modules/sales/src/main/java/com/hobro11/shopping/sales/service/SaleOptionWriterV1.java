@@ -49,8 +49,7 @@ public class SaleOptionWriterV1 implements SaleOptionWriter {
 
     @Override
     public void deleteSaleOption(Long id) {
-        SaleOption saleOption = findSaleOptionById(id);
-        saleOptionRepo.delete(saleOption);
+        saleOptionRepo.deleteById(id);
     }
 
     private SaleOption findSaleOptionById(Long id) {

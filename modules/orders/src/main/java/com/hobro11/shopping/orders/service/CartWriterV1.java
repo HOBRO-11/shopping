@@ -59,9 +59,7 @@ public class CartWriterV1 implements CartWriter {
 
     @Override
     public void deleteCart(Long cartId) {
-        cartRepo.findById(cartId).ifPresent(cart -> {
-            cartRepo.delete(cart);
-        });
+            cartRepo.deleteById(cartId);
     }
 
 }

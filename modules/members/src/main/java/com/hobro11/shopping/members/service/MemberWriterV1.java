@@ -8,6 +8,7 @@ import com.hobro11.shopping.members.exception.MemberNotFoundException;
 import com.hobro11.shopping.members.exception.MemberUniqueBrnException;
 import com.hobro11.shopping.members.repository.MemberRepo;
 import com.hobro11.shopping.members.service.dto.MemberCreateDto;
+import com.hobro11.shopping.members.service.dto.MemberReadOnly;
 
 import lombok.RequiredArgsConstructor;
 
@@ -18,16 +19,26 @@ public class MemberWriterV1 implements MemberWriter {
     private final MemberRepo memberRepo;
 
     @Override
-    public void createMember(MemberCreateDto dto) {
-        checkUniqueBrn(dto);
-        memberRepo.save(dto.toEntity());
+    public MemberReadOnly findMemberReadOnlyById(Long id) {
+        return memberRepo.findMemberReadOnlyById(id)
+                .orElseThrow(() -> new MemberNotFoundException());
     }
 
-    private void checkUniqueBrn(MemberCreateDto dto) {
-        memberRepo.findByBrn(dto.getBrn())
-                .ifPresent(member -> {
-                    throw new MemberUniqueBrnException();
-                });
+    @Override
+    public Long createMember(MemberCreateDto dto) {
+        checkUniqueBrn(dto.getBrn());
+        return memberRepo.save(dto.toEntity()).getId();
+    }
+
+    @Override
+    public void checkBrn(Long brn) {
+        checkUniqueBrn(brn);
+    }
+
+    private void checkUniqueBrn(Long brn) {
+        if (memberRepo.exexistsByBrn(brn)) {
+            throw new MemberUniqueBrnException();
+        }
     }
 
     @Override

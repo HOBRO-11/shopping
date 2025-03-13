@@ -2,11 +2,10 @@ package com.hobro11.shopping.sales.service;
 
 import java.net.URI;
 
-import org.locationtech.jts.geom.Point;
 import org.springframework.stereotype.Service;
 
-import com.hobro11.shopping.sales.ShopPageStatue;
 import com.hobro11.shopping.sales.ShopPage;
+import com.hobro11.shopping.sales.ShopPageStatue;
 import com.hobro11.shopping.sales.exception.ShopPageNotFoundException;
 import com.hobro11.shopping.sales.exception.ShopPageUniqueTitleException;
 import com.hobro11.shopping.sales.repository.ShopPageRepo;
@@ -28,9 +27,8 @@ public class ShopPageWriterV1 implements ShopPageWriter {
     }
 
     @Override
-    public void updateTitle(Long id, String title) {
-        ShopPage shopPage = findShopPageById(id);
-        shopPage.setTitle(title);
+    public void checkTitle(String title) {
+        checkUniqueTitle(title);
     }
 
     @Override
@@ -52,15 +50,8 @@ public class ShopPageWriterV1 implements ShopPageWriter {
     }
 
     @Override
-    public void updateLocation(Long id, Point location) {
-        ShopPage shopPage = findShopPageById(id);
-        shopPage.setLocation(location);
-    }
-
-    @Override
     public void deleteShopPage(Long id) {
-        ShopPage shopPage = findShopPageById(id);
-        shopPageRepo.delete(shopPage);
+        shopPageRepo.deleteById(id);
     }
 
     private ShopPage findShopPageById(Long id) {
@@ -69,9 +60,8 @@ public class ShopPageWriterV1 implements ShopPageWriter {
     }
 
     private void checkUniqueTitle(String title) {
-        shopPageRepo.findByTitle(title)
-                .ifPresent(shopPage -> {
-                    throw new ShopPageUniqueTitleException();
-                });
+        if (shopPageRepo.existsByTitle(title)) {
+            throw new ShopPageUniqueTitleException();
+        }
     }
 }

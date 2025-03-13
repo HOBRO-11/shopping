@@ -41,7 +41,6 @@ public class ShopPage {
 
     private Long memberId;
 
-    @Setter
     private String title;
 
     @Setter
@@ -54,7 +53,6 @@ public class ShopPage {
     @Enumerated(EnumType.STRING)
     private ShopPageStatue status;
 
-    @Setter
     @Column(nullable = false, columnDefinition = "geometry(Point, 4326)")
     private Point location;
 
