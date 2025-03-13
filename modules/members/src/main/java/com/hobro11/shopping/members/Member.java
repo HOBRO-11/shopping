@@ -3,6 +3,8 @@ package com.hobro11.shopping.members;
 import java.time.LocalDateTime;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -40,9 +42,11 @@ public class Member {
     private String phone;
 
     @Setter
+    @Enumerated(EnumType.STRING)
     private MemberStatus status;
 
     @Setter
+    @Enumerated(EnumType.STRING)
     private MemberRole role;
 
     private LocalDateTime createdAt;

@@ -9,6 +9,8 @@ import org.hibernate.annotations.Type;
 import io.hypersistence.utils.hibernate.type.json.JsonType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
@@ -46,6 +48,7 @@ public class Orders {
     private Long checkSum;
 
     @Setter
+    @Enumerated(EnumType.STRING)
     private OrdersStatus status;
 
     private LocalDateTime createdAt;
