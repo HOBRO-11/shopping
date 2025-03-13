@@ -25,3 +25,12 @@ dependencies {
     implementation project(':modules:members')
     implementation project(':modules:orders')
 }
+
+bootJar {
+    enabled = true
+    mainClass = 'com.hobro11.shopping.shopQuery.ShopQueryApplication'
+}
+
+jar {
+    enabled = false
+}
