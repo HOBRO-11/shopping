@@ -1,9 +1,13 @@
 package com.hobro11.shopping.orders.service;
 
 import com.hobro11.shopping.orders.OrdersStatus;
+import com.hobro11.shopping.orders.exception.OrdersNotFoundException;
 import com.hobro11.shopping.orders.service.dto.OrdersCreateDto;
+import com.hobro11.shopping.orders.service.dto.OrdersReadOnly;
 
 public interface OrdersWriter {
+
+    OrdersReadOnly findOrdersReadOnlyByOrderNumber(Long orderNumber) throws OrdersNotFoundException;
 
     Long createOrders(OrdersCreateDto dto);
 

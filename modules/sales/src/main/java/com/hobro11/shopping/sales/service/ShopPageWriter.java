@@ -4,8 +4,11 @@ import java.net.URI;
 
 import com.hobro11.shopping.sales.ShopPageStatue;
 import com.hobro11.shopping.sales.service.dto.ShopPageCreateDto;
+import com.hobro11.shopping.sales.service.dto.ShopPageReadOnly;
 
 public interface ShopPageWriter {
+
+    ShopPageReadOnly findShopPageReadOnlyById(Long id);
 
     Long createShopPage(ShopPageCreateDto dto);
 

@@ -10,6 +10,7 @@ import com.hobro11.shopping.sales.exception.ShopPageNotFoundException;
 import com.hobro11.shopping.sales.exception.ShopPageUniqueTitleException;
 import com.hobro11.shopping.sales.repository.ShopPageRepo;
 import com.hobro11.shopping.sales.service.dto.ShopPageCreateDto;
+import com.hobro11.shopping.sales.service.dto.ShopPageReadOnly;
 
 import lombok.RequiredArgsConstructor;
 
@@ -18,6 +19,12 @@ import lombok.RequiredArgsConstructor;
 public class ShopPageWriterV1 implements ShopPageWriter {
 
     private final ShopPageRepo shopPageRepo;
+
+    @Override
+    public ShopPageReadOnly findShopPageReadOnlyById(Long id) {
+        return shopPageRepo.findShopPageReadOnlyById(id)
+                .orElseThrow(() -> new ShopPageNotFoundException());
+    }
 
     @Override
     public Long createShopPage(ShopPageCreateDto dto) {

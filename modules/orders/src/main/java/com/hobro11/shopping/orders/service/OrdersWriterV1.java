@@ -8,9 +8,11 @@ import org.springframework.stereotype.Service;
 import com.hobro11.shopping.orders.OrdersStatus;
 import com.hobro11.shopping.orders.exception.OrderNumberGenerateFailedException;
 import com.hobro11.shopping.orders.exception.OrdersCheckSumExceededException;
+import com.hobro11.shopping.orders.exception.OrdersNotFoundException;
 import com.hobro11.shopping.orders.properties.OrdersProperties;
 import com.hobro11.shopping.orders.repository.OrdersRepo;
 import com.hobro11.shopping.orders.service.dto.OrdersCreateDto;
+import com.hobro11.shopping.orders.service.dto.OrdersReadOnly;
 
 import lombok.RequiredArgsConstructor;
 
@@ -22,6 +24,12 @@ public class OrdersWriterV1 implements OrdersWriter {
     private final OrdersProperties orderProperties;
 
     @Override
+    public OrdersReadOnly findOrdersReadOnlyByOrderNumber(Long orderNumber) throws OrdersNotFoundException {
+        return ordersRepo.findOrdersReadOnlyByOrderNumber(orderNumber)
+                .orElseThrow(() -> new OrdersNotFoundException());
+    }
+
+    @Override
     public Long createOrders(OrdersCreateDto dto) {
         Long orderNumber = generateOrderNumber();
         return ordersRepo.save(dto.toEntity(orderNumber)).getOrderNumber();
@@ -29,29 +37,27 @@ public class OrdersWriterV1 implements OrdersWriter {
 
     @Override
     public void updateStatus(Long orderNumber, OrdersStatus status) {
-        ordersRepo.findById(orderNumber).ifPresent(orders -> {
+        ordersRepo.findByOrderNumber(orderNumber).ifPresent(orders -> {
             orders.setStatus(status);
-            ordersRepo.save(orders);
         });
     }
 
     @Override
     public void updateCheckSum(Long orderNumber, Long checkSum) {
-        ordersRepo.findById(orderNumber).ifPresent(orders -> {
+        ordersRepo.findByOrderNumber(orderNumber).ifPresent(orders -> {
             Long newCheckSum = orders.getCheckSum() - checkSum;
 
-            if(newCheckSum < 0) {
+            if (newCheckSum < 0) {
                 throw new OrdersCheckSumExceededException();
             }
 
             orders.setCheckSum(newCheckSum);
-            ordersRepo.save(orders);
         });
     }
 
     @Override
     public void deleteOrders(Long orderNumber) {
-        ordersRepo.deleteById(orderNumber);
+        ordersRepo.deleteByOrderNumber(orderNumber);
     }
 
     private Long generateOrderNumber() {
@@ -92,6 +98,6 @@ public class OrdersWriterV1 implements OrdersWriter {
     }
 
     private boolean isOrderNumberNonExists(Long orderNumber) {
-        return ordersRepo.existsById(orderNumber);
+        return ordersRepo.existsByOrderNumber(orderNumber);
     }
 }
