@@ -5,9 +5,11 @@ import org.springframework.stereotype.Service;
 import com.hobro11.shopping.orders.OptionQuantity;
 import com.hobro11.shopping.orders.exception.CartAlreadyExistsException;
 import com.hobro11.shopping.orders.exception.CartMaxCountExceededException;
+import com.hobro11.shopping.orders.exception.CartNotFoundException;
 import com.hobro11.shopping.orders.properties.OrdersProperties;
 import com.hobro11.shopping.orders.repository.CartRepo;
 import com.hobro11.shopping.orders.service.dto.CartCreateDto;
+import com.hobro11.shopping.orders.service.dto.CartReadOnly;
 
 import lombok.RequiredArgsConstructor;
 
@@ -17,6 +19,12 @@ public class CartWriterV1 implements CartWriter {
 
     private final CartRepo cartRepo;
     private final OrdersProperties ordersProperties;
+
+    @Override
+    public CartReadOnly findCartReadOnlyByMemberId(Long memberId) {
+        return cartRepo.findCartReadOnlyByMemberId(memberId)
+                .orElseThrow(() -> new CartNotFoundException());
+    }
 
     @Override
     public Long createCart(CartCreateDto dto) {
@@ -59,7 +67,7 @@ public class CartWriterV1 implements CartWriter {
 
     @Override
     public void deleteCart(Long cartId) {
-            cartRepo.deleteById(cartId);
+        cartRepo.deleteById(cartId);
     }
 
 }
