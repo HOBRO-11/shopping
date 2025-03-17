@@ -1,7 +1,5 @@
 package com.hobro11.shopping.shopQuery.service.dto;
 
-import java.time.LocalDateTime;
-
 import com.hobro11.shopping.sales.QSaleOption;
 import com.hobro11.shopping.sales.SaleOptionStatus;
 import com.querydsl.core.types.Expression;
@@ -12,25 +10,21 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class SaleOptionDetailDto {
+public class SaleOptionSimpleDto {
     private Long id;
     private String name;
-    private String description;
     private Long shopPageId;
     private SaleOptionStatus status;
     private Integer price;
-    private LocalDateTime createdAt;
 
-    public static Expression<SaleOptionDetailDto> asDto() {
+    public static Expression<SaleOptionSimpleDto> asDto() {
         QSaleOption saleOption = QSaleOption.saleOption;
 
-        return Projections.constructor(SaleOptionDetailDto.class,
+        return Projections.constructor(SaleOptionSimpleDto.class,
                 saleOption.id,
                 saleOption.name,
-                saleOption.description,
                 saleOption.shopPage.id,
                 saleOption.status,
-                saleOption.price,
-                saleOption.createdAt);
+                saleOption.price);
     }
 }
