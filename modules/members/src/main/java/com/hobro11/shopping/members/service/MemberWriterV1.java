@@ -32,13 +32,14 @@ public class MemberWriterV1 implements MemberWriter {
 
     @Override
     public void checkBrn(Long brn) {
-        if (brn == null) {
-            return; 
-        }
         checkUniqueBrn(brn);
     }
 
     private void checkUniqueBrn(Long brn) {
+        if(brn == null || brn == 0) {
+            return;
+        }
+
         if (memberRepo.existsByBrn(brn)) {
             throw new MemberUniqueBrnException();
         }
