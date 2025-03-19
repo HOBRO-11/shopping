@@ -1,8 +1,6 @@
 
 package com.hobro11.shopping.sales.service;
 
-import org.springframework.stereotype.Service;
-
 import com.hobro11.shopping.sales.SaleOption;
 import com.hobro11.shopping.sales.SaleOptionStatus;
 import com.hobro11.shopping.sales.ShopPage;
@@ -16,7 +14,6 @@ import com.hobro11.shopping.sales.service.dto.SaleOptionReadOnly;
 
 import lombok.RequiredArgsConstructor;
 
-@Service
 @RequiredArgsConstructor
 public class SaleOptionWriterV1 implements SaleOptionWriter {
 

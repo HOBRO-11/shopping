@@ -1,7 +1,5 @@
 package com.hobro11.shopping.orders.service;
 
-import org.springframework.stereotype.Service;
-
 import com.hobro11.shopping.orders.OptionQuantity;
 import com.hobro11.shopping.orders.exception.CartAlreadyExistsException;
 import com.hobro11.shopping.orders.exception.CartMaxCountExceededException;
@@ -13,7 +11,6 @@ import com.hobro11.shopping.orders.service.dto.CartReadOnly;
 
 import lombok.RequiredArgsConstructor;
 
-@Service
 @RequiredArgsConstructor
 public class CartWriterV1 implements CartWriter {
 

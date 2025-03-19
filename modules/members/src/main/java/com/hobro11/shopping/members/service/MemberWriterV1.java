@@ -1,7 +1,5 @@
 package com.hobro11.shopping.members.service;
 
-import org.springframework.stereotype.Service;
-
 import com.hobro11.shopping.members.Member;
 import com.hobro11.shopping.members.MemberStatus;
 import com.hobro11.shopping.members.exception.MemberNotFoundException;
@@ -12,7 +10,6 @@ import com.hobro11.shopping.members.service.dto.MemberReadOnly;
 
 import lombok.RequiredArgsConstructor;
 
-@Service
 @RequiredArgsConstructor
 public class MemberWriterV1 implements MemberWriter {
 

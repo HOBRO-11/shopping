@@ -3,8 +3,6 @@ package com.hobro11.shopping.orders.service;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-import org.springframework.stereotype.Service;
-
 import com.hobro11.shopping.orders.OrdersStatus;
 import com.hobro11.shopping.orders.exception.OrderNumberGenerateFailedException;
 import com.hobro11.shopping.orders.exception.OrdersCheckSumExceededException;
@@ -16,7 +14,6 @@ import com.hobro11.shopping.orders.service.dto.OrdersReadOnly;
 
 import lombok.RequiredArgsConstructor;
 
-@Service
 @RequiredArgsConstructor
 public class OrdersWriterV1 implements OrdersWriter {
 

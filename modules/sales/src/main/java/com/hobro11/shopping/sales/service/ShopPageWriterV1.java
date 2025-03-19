@@ -2,8 +2,6 @@ package com.hobro11.shopping.sales.service;
 
 import java.net.URI;
 
-import org.springframework.stereotype.Service;
-
 import com.hobro11.shopping.sales.ShopPage;
 import com.hobro11.shopping.sales.ShopPageStatue;
 import com.hobro11.shopping.sales.exception.ShopPageNotFoundException;
@@ -14,7 +12,6 @@ import com.hobro11.shopping.sales.service.dto.ShopPageReadOnly;
 
 import lombok.RequiredArgsConstructor;
 
-@Service
 @RequiredArgsConstructor
 public class ShopPageWriterV1 implements ShopPageWriter {
 
