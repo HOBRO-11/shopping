@@ -20,7 +20,6 @@ public class MembersAutoConfig {
 
     @Bean
     public MemberWriter memberWriter(MemberRepo memberRepo) {
-        System.out.println("ok memberWriter");
         return new MemberWriterV1(memberRepo);
     }
 }

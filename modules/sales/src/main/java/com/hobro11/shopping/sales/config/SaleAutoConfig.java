@@ -23,13 +23,11 @@ public class SaleAutoConfig {
 
     @Bean
     public SaleOptionWriter saleOptionWriter(SaleOptionRepo saleOptionRepo, ShopPageRepo shopPageRepo) {
-        System.out.println("ok saleOptionWriter");
         return new SaleOptionWriterV1(saleOptionRepo, shopPageRepo);
     }
 
     @Bean
     public ShopPageWriter shopPageWriter(ShopPageRepo shopPageRepo) {
-        System.out.println("ok shopPageWriter");
         return new ShopPageWriterV1(shopPageRepo);
     }
 

@@ -24,19 +24,16 @@ public class OrdersAutoConfig {
 
     @Bean
     public OrdersProperties ordersProperties() {
-        System.out.println("ok ordersProperties");
         return new OrdersProperties();
     }
     
     @Bean
     public OrdersWriter ordersWriter(OrdersRepo ordersRepo, OrdersProperties ordersProperties) {
-        System.out.println("ok ordersWriter");
         return new OrdersWriterV1(ordersRepo, ordersProperties);
     }
 
     @Bean
     public CartWriter cartWriter(CartRepo cartRepo, OrdersProperties ordersProperties) {
-        System.out.println("ok cartWriter");
         return new CartWriterV1(cartRepo, ordersProperties);
     }
 
