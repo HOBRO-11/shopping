@@ -1,5 +1,6 @@
 package com.hobro11.shopping.shopCommand.controller;
 
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,16 +14,17 @@ import com.hobro11.shopping.shopCommand.controller.form.AdminMemberCreateForm;
 import com.hobro11.shopping.shopCommand.controller.form.BasicMemberCreateForm;
 import com.hobro11.shopping.shopCommand.controller.form.BusinessMemberCreateForm;
 import com.hobro11.shopping.shopCommand.service.MemberCommandService;
+import com.hobro11.shopping.shopCommand.validate.Phone;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
 import lombok.RequiredArgsConstructor;
 
 @RequestMapping("/api/members")
 @RestController
 @RequiredArgsConstructor
+@Validated
 public class MemberController {
 
     private final MemberCommandService memberCommandService;
@@ -54,8 +56,7 @@ public class MemberController {
     }
 
     @PatchMapping("/{memberId}/phone")
-    public void updatePhone(@PathVariable Long memberId,
-            @Valid @Pattern(regexp = "^010-\\d{3,4}-\\d{4}$") String phone) {
+    public void updatePhone(@PathVariable Long memberId, @Phone String phone) {
         memberCommandService.updatePhone(memberId, phone);
     }
 

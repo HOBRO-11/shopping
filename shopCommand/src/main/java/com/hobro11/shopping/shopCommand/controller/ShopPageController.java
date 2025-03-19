@@ -3,6 +3,7 @@ package com.hobro11.shopping.shopCommand.controller;
 import java.net.URI;
 
 import org.locationtech.jts.geom.Point;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,11 +23,12 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/api/shopPages")
 @RestController
 @RequiredArgsConstructor
+@Validated
 public class ShopPageController {
 
     private final ShopPageCommandService shopPageCommandService;
 
-    // TODO: create thumbnailUri, location service 
+    // TODO: create thumbnailUri, location service
     @PostMapping
     public Long createShopPage(@Valid @RequestBody ShopPageCreateForm form) {
         URI thumbnailUri = null;

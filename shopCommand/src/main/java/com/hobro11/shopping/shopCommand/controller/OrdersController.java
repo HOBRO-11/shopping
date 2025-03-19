@@ -1,5 +1,6 @@
 package com.hobro11.shopping.shopCommand.controller;
 
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +21,7 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/api/orders")
 @RestController
 @RequiredArgsConstructor
+@Validated
 public class OrdersController {
 
     private final OrdersCommandService ordersCommandService;
