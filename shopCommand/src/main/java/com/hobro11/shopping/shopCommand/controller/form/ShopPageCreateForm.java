@@ -22,9 +22,11 @@ public class ShopPageCreateForm {
     private final String description;
     @NotNull(message = "{shopPageCreateForm.address.notNull}")
     private final Address address;
+    @NotNull(message = "{shopPageCreateForm.zoneNo.notNull}")
+    private final Integer zoneNo;
 
     public ShopPageCreateDto toDto(URI thumbnailUri) {
-        return new ShopPageCreateDto(memberId, title, thumbnailUri, description, address);
+        return new ShopPageCreateDto(memberId, title, thumbnailUri, description, address, zoneNo);
     }
 
 }

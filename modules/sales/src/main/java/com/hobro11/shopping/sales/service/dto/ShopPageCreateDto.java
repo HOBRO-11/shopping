@@ -18,6 +18,7 @@ public class ShopPageCreateDto {
     private final URI thumbnailUri;
     private final String description;
     private final Address address;
+    private final Integer zoneNo;
 
     public ShopPage toEntity() {
         return ShopPage.builder()
@@ -25,7 +26,7 @@ public class ShopPageCreateDto {
                 .title(title)
                 .thumbnailUri(thumbnailUri)
                 .description(description)
-                .status(ShopPageStatue.ACTIVE)
+                .status(ShopPageStatue.PENDING)
                 .address(address)
                 .build();
     }

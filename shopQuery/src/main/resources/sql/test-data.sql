@@ -94,9 +94,22 @@ create table shop_page (
     ),
     title varchar(255),
     thumbnail_uri bytea,
+    zone_no integer,
     primary key (id),
     unique (title)
 );
+
+
+create table shop_geo (
+    shop_page_id bigint not null,
+    latitude float,
+    longitude float,
+    geo_hash_lat integer,
+    geo_hash_lon integer,
+    primary key (shop_page_id)
+);
+
+create index idx_shop_geo_geo_hash on shop_geo (geo_hash_lat, geo_hash_lon);
 
 alter table if exists sale_option
 add constraint fk_shop_page_id_at_sale_option foreign key (shop_page_id) references shop_page;
