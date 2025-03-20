@@ -2,7 +2,6 @@ package com.hobro11.shopping.shopCommand.controller;
 
 import java.net.URI;
 
-import org.locationtech.jts.geom.Point;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -32,8 +31,7 @@ public class ShopPageController {
     @PostMapping
     public Long createShopPage(@Valid @RequestBody ShopPageCreateForm form) {
         URI thumbnailUri = null;
-        Point location = null;
-        return shopPageCommandService.createShopPage(form.toDto(thumbnailUri, location));
+        return shopPageCommandService.createShopPage(form.toDto(thumbnailUri));
     }
 
     @PatchMapping("/{shopPageId}/status")

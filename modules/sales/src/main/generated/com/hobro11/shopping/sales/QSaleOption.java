@@ -54,7 +54,7 @@ public class QSaleOption extends EntityPathBase<SaleOption> {
 
     public QSaleOption(Class<? extends SaleOption> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
-        this.shopPage = inits.isInitialized("shopPage") ? new QShopPage(forProperty("shopPage")) : null;
+        this.shopPage = inits.isInitialized("shopPage") ? new QShopPage(forProperty("shopPage"), inits.get("shopPage")) : null;
     }
 
 }

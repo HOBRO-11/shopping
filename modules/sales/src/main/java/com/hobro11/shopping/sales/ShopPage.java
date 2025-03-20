@@ -5,9 +5,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.locationtech.jts.geom.Point;
-
-import jakarta.persistence.Column;
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -53,8 +51,8 @@ public class ShopPage {
     @Enumerated(EnumType.STRING)
     private ShopPageStatue status;
 
-    @Column(nullable = false, columnDefinition = "geometry(Point, 4326)")
-    private Point location;
+    @Embedded
+    private Address address;
 
     private LocalDateTime createdAt;
 
@@ -65,13 +63,13 @@ public class ShopPage {
 
     @Builder
     public ShopPage(Long memberId, String title, URI thumbnailUri, String description, ShopPageStatue status,
-            Point location) {
+            Address address) {
         this.memberId = memberId;
         this.title = title;
         this.thumbnailUri = thumbnailUri;
         this.description = description;
         this.status = status;
-        this.location = location;
+        this.address = address;
     }
 
     public void addSaleOption(SaleOption saleOption) {

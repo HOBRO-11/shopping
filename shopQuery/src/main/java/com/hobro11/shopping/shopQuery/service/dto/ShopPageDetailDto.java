@@ -4,9 +4,8 @@ import java.net.URI;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import org.locationtech.jts.geom.Point;
-
 import com.hobro11.shopping.members.QMember;
+import com.hobro11.shopping.sales.Address;
 import com.hobro11.shopping.sales.QShopPage;
 import com.hobro11.shopping.sales.ShopPageStatue;
 import com.querydsl.core.types.Expression;
@@ -27,14 +26,14 @@ public class ShopPageDetailDto {
     private URI thumbnailUri;
     private String description;
     private ShopPageStatue status;
-    private LocationDto location;
+    private Address address;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     @Setter
     private List<SaleOptionDetailDto> saleOptionSimples;
 
     public ShopPageDetailDto(Long id, Long memberId, Long brn, String name, String phone, String title,
-            URI thumbnailUri, String description, ShopPageStatue status, Point location, LocalDateTime createdAt,
+            URI thumbnailUri, String description, ShopPageStatue status, Address address, LocalDateTime createdAt,
             LocalDateTime updatedAt) {
         this.id = id;
         this.memberId = memberId;
@@ -45,7 +44,7 @@ public class ShopPageDetailDto {
         this.thumbnailUri = thumbnailUri;
         this.description = description;
         this.status = status;
-        this.location = new LocationDto(location.getX(), location.getY());
+        this.address = address;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
@@ -66,7 +65,7 @@ public class ShopPageDetailDto {
                 shopPage.thumbnailUri,
                 shopPage.description,
                 shopPage.status,
-                shopPage.location,
+                shopPage.address,
                 shopPage.createdAt,
                 shopPage.updatedAt);
     }

@@ -3,8 +3,7 @@ package com.hobro11.shopping.sales.service.dto;
 import java.net.URI;
 import java.time.LocalDateTime;
 
-import org.locationtech.jts.geom.Point;
-
+import com.hobro11.shopping.sales.Address;
 import com.hobro11.shopping.sales.ShopPageStatue;
 
 public interface ShopPageReadOnly {
@@ -20,7 +19,7 @@ public interface ShopPageReadOnly {
 
     ShopPageStatue getStatus();
 
-    Point getLocation();
+    Address getAddress();
 
     LocalDateTime getCreatedAt();
 

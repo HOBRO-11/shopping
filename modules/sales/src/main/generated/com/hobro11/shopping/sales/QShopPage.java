@@ -18,15 +18,17 @@ public class QShopPage extends EntityPathBase<ShopPage> {
 
     private static final long serialVersionUID = 196525610L;
 
+    private static final PathInits INITS = PathInits.DIRECT2;
+
     public static final QShopPage shopPage = new QShopPage("shopPage");
+
+    public final QAddress address;
 
     public final DateTimePath<java.time.LocalDateTime> createdAt = createDateTime("createdAt", java.time.LocalDateTime.class);
 
     public final StringPath description = createString("description");
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
-
-    public final ComparablePath<org.locationtech.jts.geom.Point> location = createComparable("location", org.locationtech.jts.geom.Point.class);
 
     public final NumberPath<Long> memberId = createNumber("memberId", Long.class);
 
@@ -41,15 +43,24 @@ public class QShopPage extends EntityPathBase<ShopPage> {
     public final DateTimePath<java.time.LocalDateTime> updatedAt = createDateTime("updatedAt", java.time.LocalDateTime.class);
 
     public QShopPage(String variable) {
-        super(ShopPage.class, forVariable(variable));
+        this(ShopPage.class, forVariable(variable), INITS);
     }
 
     public QShopPage(Path<? extends ShopPage> path) {
-        super(path.getType(), path.getMetadata());
+        this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
     }
 
     public QShopPage(PathMetadata metadata) {
-        super(ShopPage.class, metadata);
+        this(metadata, PathInits.getFor(metadata, INITS));
+    }
+
+    public QShopPage(PathMetadata metadata, PathInits inits) {
+        this(ShopPage.class, metadata, inits);
+    }
+
+    public QShopPage(Class<? extends ShopPage> type, PathMetadata metadata, PathInits inits) {
+        super(type, metadata, inits);
+        this.address = inits.isInitialized("address") ? new QAddress(forProperty("address")) : null;
     }
 
 }

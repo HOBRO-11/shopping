@@ -2,8 +2,7 @@ package com.hobro11.shopping.shopCommand.controller.form;
 
 import java.net.URI;
 
-import org.locationtech.jts.geom.Point;
-
+import com.hobro11.shopping.sales.Address;
 import com.hobro11.shopping.sales.service.dto.ShopPageCreateDto;
 
 import jakarta.validation.constraints.NotBlank;
@@ -21,11 +20,11 @@ public class ShopPageCreateForm {
     private final String title;
     @NotBlank(message = "{shopPageCreateForm.description.notNull}")
     private final String description;
-    @NotBlank(message = "{shopPageCreateForm.address.notNull}")
-    private final String address;
+    @NotNull(message = "{shopPageCreateForm.address.notNull}")
+    private final Address address;
 
-    public ShopPageCreateDto toDto(URI thumbnailUri, Point location) {
-        return new ShopPageCreateDto(memberId, title, thumbnailUri, description, location);
+    public ShopPageCreateDto toDto(URI thumbnailUri) {
+        return new ShopPageCreateDto(memberId, title, thumbnailUri, description, address);
     }
 
 }

@@ -2,9 +2,8 @@ package com.hobro11.shopping.sales.service.dto;
 
 import java.net.URI;
 
-import org.locationtech.jts.geom.Point;
-
 import com.hobro11.shopping.sales.ShopPageStatue;
+import com.hobro11.shopping.sales.Address;
 import com.hobro11.shopping.sales.ShopPage;
 
 import lombok.Getter;
@@ -18,7 +17,7 @@ public class ShopPageCreateDto {
     private final String title;
     private final URI thumbnailUri;
     private final String description;
-    private final Point location;
+    private final Address address;
 
     public ShopPage toEntity() {
         return ShopPage.builder()
@@ -27,7 +26,7 @@ public class ShopPageCreateDto {
                 .thumbnailUri(thumbnailUri)
                 .description(description)
                 .status(ShopPageStatue.ACTIVE)
-                .location(location)
+                .address(address)
                 .build();
     }
 
