@@ -2,7 +2,7 @@ package com.hobro11.shopping.shopCommand.service.impl;
 
 import java.net.URI;
 
-import org.springframework.stereotype.Service;
+// import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.hobro11.shopping.sales.ShopPageStatue;
@@ -12,7 +12,6 @@ import com.hobro11.shopping.shopCommand.service.ShopPageCommandService;
 
 import lombok.RequiredArgsConstructor;
 
-@Service
 @Transactional
 @RequiredArgsConstructor
 public class ShopPageCommandServiceV1 implements ShopPageCommandService {

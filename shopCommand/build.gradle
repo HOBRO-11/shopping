@@ -19,6 +19,7 @@ dependencies {
     implementation project(':modules:sales')
     implementation project(':modules:members')
     implementation project(':modules:orders')
+    implementation project(':modules:locations')
 
     // test
     testImplementation 'org.springframework.boot:spring-boot-starter-test:3.3.9'
