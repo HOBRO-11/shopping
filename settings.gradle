@@ -1,9 +1,9 @@
 rootProject.name = 'shopping'
 
-include 'modules:members'
-include 'modules:orders'
-include 'modules:sales'
-include 'modules:locations'
-include 'shopQuery'
-include 'shopCommand'
+include 'modules:members',
+        'modules:orders',
+        'modules:sales',
+        'modules:locations',
+        'shopQuery',
+        'shopCommand'
 

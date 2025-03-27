@@ -20,16 +20,6 @@ dependencies {
 	annotationProcessor "com.querydsl:querydsl-apt:5.0.0:jakarta"
 }
 
-def generated = 'src/main/generated'
-
-tasks.withType(JavaCompile) {
-    options.getGeneratedSourceOutputDirectory().set(file(generated))
-}
-
-sourceSets {
-    main.java.srcDirs += [ generated ]
-}
-
 clean {
     delete file('src/main/generated')
 }

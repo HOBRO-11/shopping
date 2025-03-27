@@ -25,6 +25,7 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test:3.3.9'
     testImplementation 'org.hibernate:hibernate-core:6.2.34.Final'
     testRuntimeOnly 'org.postgresql:postgresql:42.6.2'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
 bootJar {

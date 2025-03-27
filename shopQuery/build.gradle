@@ -21,6 +21,8 @@ dependencies {
 	implementation 'com.querydsl:querydsl-jpa:5.0.0:jakarta' 
 	annotationProcessor "com.querydsl:querydsl-apt:5.0.0:jakarta"
 
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
     implementation project(':modules:sales')
     implementation project(':modules:members')
     implementation project(':modules:orders')
