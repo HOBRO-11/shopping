@@ -3,10 +3,9 @@ package com.hobro11.shopping.orders;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.hibernate.annotations.Type;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
-import io.hypersistence.utils.hibernate.type.json.JsonType;
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -23,7 +22,7 @@ import lombok.ToString;
 @Entity
 @Getter
 @ToString
-@Table(name = "cart", uniqueConstraints = @UniqueConstraint(columnNames = {"memberId"}))
+@Table(name = "cart", uniqueConstraints = @UniqueConstraint(columnNames = { "memberId" }))
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @EqualsAndHashCode
 public class Cart {
@@ -34,8 +33,7 @@ public class Cart {
 
     private Long memberId;
 
-    @Type(JsonType.class)
-    @Column(columnDefinition = "jsonb")
+    @JdbcTypeCode(SqlTypes.JSON)
     private Set<OptionQuantity> optionQuantities = new HashSet<>();
 
     @Builder
