@@ -36,3 +36,7 @@ bootJar {
 jar {
     enabled = false
 }
+
+tasks.withType(JavaCompile) {
+    options.compilerArgs << "-parameters"
+}
