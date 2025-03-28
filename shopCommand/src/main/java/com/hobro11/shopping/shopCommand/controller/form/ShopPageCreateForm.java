@@ -7,23 +7,25 @@ import com.hobro11.shopping.sales.service.dto.ShopPageCreateDto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 
 @Getter
-@RequiredArgsConstructor
+@NoArgsConstructor
+@AllArgsConstructor
 public class ShopPageCreateForm {
-    
+
     @NotNull(message = "{shopPageCreateForm.memberId.notNull}")
-    private final Long memberId;
+    private Long memberId;
     @NotBlank(message = "{shopPageCreateForm.title.notBlank}")
-    private final String title;
+    private String title;
     @NotBlank(message = "{shopPageCreateForm.description.notNull}")
-    private final String description;
+    private String description;
     @NotNull(message = "{shopPageCreateForm.address.notNull}")
-    private final Address address;
+    private Address address;
     @NotNull(message = "{shopPageCreateForm.zoneNo.notNull}")
-    private final Integer zoneNo;
+    private Integer zoneNo;
 
     public ShopPageCreateDto toDto(URI thumbnailUri) {
         return new ShopPageCreateDto(memberId, title, thumbnailUri, description, address, zoneNo);

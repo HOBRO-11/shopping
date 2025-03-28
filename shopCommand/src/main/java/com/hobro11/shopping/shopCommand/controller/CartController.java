@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hobro11.shopping.shopCommand.service.CartCommandService;
@@ -26,17 +27,22 @@ public class CartController {
     private final CartCommandService cartCommandService;
 
     @PatchMapping("/{memberId}/add")
-    public void createCart(@PathVariable Long memberId, @NotNull Long saleOptionId, @Positive Integer quantity) {
+    public void createCart(
+            @PathVariable("memberId") final Long memberId,
+            @NotNull @RequestParam("saleOptionId") final Long saleOptionId,
+            @Positive @RequestParam("quantity") final Integer quantity) {
         cartCommandService.addSaleOptionAtCart(memberId, saleOptionId, quantity);
     }
 
     @PatchMapping("/{memberId}/remove")
-    public void removeCart(@PathVariable Long memberId, @NotEmpty @RequestBody List<Long> saleOptionIds) {
+    public void removeCart(
+            @PathVariable("memberId") final Long memberId,
+            @NotEmpty @RequestBody final List<Long> saleOptionIds) {
         cartCommandService.removeSaleOptionAtCart(memberId, saleOptionIds);
     }
 
     @DeleteMapping("/{memberId}")
-    public void deleteCart(@PathVariable Long memberId) {
+    public void deleteCart(@PathVariable("memberId") final Long memberId) {
         cartCommandService.deleteCartByMemberId(memberId);
     }
 

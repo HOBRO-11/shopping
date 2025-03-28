@@ -13,12 +13,12 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/api/carts")
 @RestController
 @RequiredArgsConstructor
-public class CartControlller {
+public class CartController {
 
     private final CartQueryService cartQueryService;
 
     @GetMapping("/{memberId}")
-    public CartDetailDto getCart(@PathVariable Long memberId) {
+    public CartDetailDto getCart(@PathVariable("memberId") final Long memberId) {
         return cartQueryService.getCart(memberId);
     }
 

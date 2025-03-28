@@ -17,16 +17,18 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequiredArgsConstructor
 public class OrdersController {
-    
+
     private final OrdersQueryService ordersQueryService;
 
     @GetMapping("/{memberId}")
-    public List<OrdersSimpleDto> getOrders(@PathVariable Long memberId) {
+    public List<OrdersSimpleDto> getOrders(@PathVariable("memberId") final Long memberId) {
         return ordersQueryService.getOrdersSimples(memberId);
     }
 
     @GetMapping("/{memberId}/{orderNumber}")
-    public OrdersDetailDto getOrderDetail(@PathVariable Long memberId, @PathVariable Long orderNumber) {
+    public OrdersDetailDto getOrderDetail(
+            @PathVariable("memberId") final Long memberId,
+            @PathVariable("orderNumber") final Long orderNumber) {
         return ordersQueryService.getOrderDetail(memberId, orderNumber);
     }
 }

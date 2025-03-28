@@ -19,12 +19,12 @@ public class MemberController {
     private final MemberQueryService memberQueryService;
     
     @GetMapping("/{memberId}")
-    public MemberSimpleDto getMemberSimple(@PathVariable Long memberId) {
+    public MemberSimpleDto getMemberSimple(@PathVariable("memberId") final Long memberId) {
         return memberQueryService.getMemberSimple(memberId).orElse(null);
     }
 
     @GetMapping("/{memberId}/detail")
-    public MemberDetailDto getMemberDetail(@PathVariable Long memberId) {
+    public MemberDetailDto getMemberDetail(@PathVariable("memberId") final Long memberId) {
         return memberQueryService.getMemberDetail(memberId).orElse(null);
     }
 }

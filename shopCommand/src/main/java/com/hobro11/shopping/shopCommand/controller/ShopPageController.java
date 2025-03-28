@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hobro11.shopping.sales.ShopPageStatue;
@@ -29,29 +30,35 @@ public class ShopPageController {
 
     // TODO: create thumbnailUri, location service
     @PostMapping
-    public Long createShopPage(@Valid @RequestBody ShopPageCreateForm form) {
+    public Long createShopPage(@Valid @RequestBody final ShopPageCreateForm form) {
         URI thumbnailUri = null;
         return shopPageCommandService.createShopPage(form.toDto(thumbnailUri));
     }
 
     @PatchMapping("/{shopPageId}/status")
-    public void updateStatus(@PathVariable Long shopPageId, @NotNull ShopPageStatue status) {
+    public void updateStatus(
+            @PathVariable("shopPageId") final Long shopPageId,
+            @NotNull @RequestParam("status") final ShopPageStatue status) {
         shopPageCommandService.updateStatus(shopPageId, status);
     }
 
     // TODO: create thumbnailUri
     @PatchMapping("/{shopPageId}/thumbnailUri")
-    public void updateThumbnailUri(@PathVariable Long shopPageId, @NotNull URI thumbnailUri) {
+    public void updateThumbnailUri(
+            @PathVariable("shopPageId") final Long shopPageId,
+            @NotNull @RequestParam("thumbnailUri") final URI thumbnailUri) {
         shopPageCommandService.updateThumbnailUri(shopPageId, thumbnailUri);
     }
 
     @PatchMapping("/{shopPageId}/description")
-    public void updateDescription(@PathVariable Long shopPageId, @NotNull String description) {
+    public void updateDescription(
+            @PathVariable("shopPageId") final Long shopPageId,
+            @NotNull @RequestParam("description") final String description) {
         shopPageCommandService.updateDescription(shopPageId, description);
     }
 
     @DeleteMapping("/{shopPageId}")
-    public void deleteShopPage(@PathVariable Long shopPageId) {
+    public void deleteShopPage(@PathVariable("shopPageId") final Long shopPageId) {
         shopPageCommandService.deleteShopPage(shopPageId);
     }
 }

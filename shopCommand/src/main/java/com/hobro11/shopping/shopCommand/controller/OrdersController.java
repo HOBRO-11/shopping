@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hobro11.shopping.orders.OrdersStatus;
@@ -27,22 +28,26 @@ public class OrdersController {
     private final OrdersCommandService ordersCommandService;
 
     @PostMapping
-    public Long createOrder(@Valid @RequestBody OrdersCreateForm form) {
+    public Long createOrder(@Valid @RequestBody final OrdersCreateForm form) {
         return ordersCommandService.createOrder(form.toDto());
     }
 
     @PatchMapping("/{orderNumber}/status")
-    public void updateStatus(@PathVariable Long orderNumber, @NotNull OrdersStatus status) {
+    public void updateStatus(
+            @PathVariable("orderNumber") final Long orderNumber,
+            @NotNull @RequestParam("status") final OrdersStatus status) {
         ordersCommandService.updateStatus(orderNumber, status);
     }
 
     @PatchMapping("/{orderNumber}/checkSum")
-    public void updateCheckSum(@PathVariable Long orderNumber, @NotNull Long saleOptionId, @Positive Integer quantity) {
+    public void updateCheckSum(@PathVariable("orderNumber") final Long orderNumber,
+            @NotNull @RequestParam("saleOptionId") final Long saleOptionId,
+            @Positive @RequestParam("quantity") final Integer quantity) {
         ordersCommandService.updateCheckSum(orderNumber, saleOptionId, quantity);
     }
 
     @DeleteMapping("/{orderNumber}")
-    public void deleteOrders(@PathVariable Long orderNumber) {
+    public void deleteOrders(@PathVariable("orderNumber") final Long orderNumber) {
         ordersCommandService.deleteOrders(orderNumber);
     }
 }

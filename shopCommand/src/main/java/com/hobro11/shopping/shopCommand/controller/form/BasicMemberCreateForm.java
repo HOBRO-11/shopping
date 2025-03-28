@@ -6,16 +6,20 @@ import com.hobro11.shopping.members.service.dto.MemberCreateDto;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-@RequiredArgsConstructor
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
 public class BasicMemberCreateForm {
 
     @NotBlank(message = "{memberCreateForm.name.notBlank}")
-    private final String name;
+    private String name;
     @NotNull(message = "{memberCreateForm.phone.notNull}")
     @Pattern(regexp = "^010-\\d{3,4}-\\d{4}$", message = "{memberCreateForm.phone.pattern}")
-    private final String phone;
+    private String phone;
 
     public MemberCreateDto toDto() {
         return new MemberCreateDto(null, name, phone, MemberRole.BASIC);

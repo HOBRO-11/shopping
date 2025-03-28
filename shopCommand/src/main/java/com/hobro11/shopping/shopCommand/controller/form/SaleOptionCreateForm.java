@@ -6,24 +6,26 @@ import com.hobro11.shopping.sales.service.dto.SaleOptionCreateDto;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 
 @Getter
-@RequiredArgsConstructor
+@NoArgsConstructor
+@AllArgsConstructor
 public class SaleOptionCreateForm {
 
     @NotBlank(message = "{saleOptionCreateForm.name.notBlank}")
-    private final String name;
+    private String name;
     @NotNull(message = "{saleOptionCreateForm.shopPageId.notNull}")
-    private final Long shopPageId;
+    private Long shopPageId;
     @NotNull(message = "{saleOptionCreateForm.description.notNull}")
-    private final String description;
+    private String description;
     @NotNull(message = "{saleOptionCreateForm.status.notNull}")
-    private final SaleOptionStatus status;
+    private SaleOptionStatus status;
     @Positive(message = "{saleOptionCreateForm.price.positive}")
     @NotNull(message = "{saleOptionCreateForm.price.notNull}")
-    private final Integer price;
+    private Integer price;
 
     public SaleOptionCreateDto toDto() {
         return new SaleOptionCreateDto(name, shopPageId, description, status, price);

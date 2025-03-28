@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hobro11.shopping.members.MemberStatus;
@@ -30,38 +31,44 @@ public class MemberController {
     private final MemberCommandService memberCommandService;
 
     @PostMapping("/basic")
-    public Long createBasicMember(@Valid @RequestBody BasicMemberCreateForm form) {
+    public Long createBasicMember(@Valid @RequestBody final BasicMemberCreateForm form) {
         return memberCommandService.createMember(form.toDto());
     }
 
     @PostMapping("/business")
-    public Long createBusinessMember(@Valid @RequestBody BusinessMemberCreateForm form) {
+    public Long createBusinessMember(@Valid @RequestBody final BusinessMemberCreateForm form) {
         return memberCommandService.createMember(form.toDto());
     }
 
     @PostMapping("/admin")
-    public Long createAdminMember(@Valid @RequestBody AdminMemberCreateForm form) {
+    public Long createAdminMember(@Valid @RequestBody final AdminMemberCreateForm form) {
         return memberCommandService.createMember(form.toDto());
     }
 
     @GetMapping("/brn")
-    public String checkBrn(@NotNull Long brn) {
+    public String checkBrn(@NotNull @RequestParam("brn") final Long brn) {
         memberCommandService.checkBrn(brn);
         return "ok";
     }
 
     @PatchMapping("/{memberId}/name")
-    public void updateName(@PathVariable Long memberId, @NotBlank String name) {
+    public void updateName(
+            @PathVariable("memberId") final Long memberId,
+            @NotBlank @RequestBody final String name) {
         memberCommandService.updateName(memberId, name);
     }
 
     @PatchMapping("/{memberId}/phone")
-    public void updatePhone(@PathVariable Long memberId, @Phone String phone) {
+    public void updatePhone(
+            @PathVariable("memberId") final Long memberId,
+            @Phone @RequestBody final String phone) {
         memberCommandService.updatePhone(memberId, phone);
     }
 
     @PatchMapping("/{memberId}/status")
-    public void updateStatus(@PathVariable Long memberId, @NotNull MemberStatus status) {
+    public void updateStatus(
+            @PathVariable("memberId") final Long memberId,
+            @NotNull @RequestParam("status") final MemberStatus status) {
         memberCommandService.updateStatus(memberId, status);
     }
 }

@@ -2,6 +2,7 @@ package com.hobro11.shopping.shopQuery.controller;
 
 import java.util.List;
 
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,11 +17,13 @@ import com.hobro11.shopping.shopQuery.service.dto.ShopPageDetailDto;
 import com.hobro11.shopping.shopQuery.service.dto.ShopPageSimpleDto;
 
 import jakarta.annotation.PostConstruct;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.RequiredArgsConstructor;
 
 @RequestMapping("/api/shopPages")
 @RestController
 @RequiredArgsConstructor
+@Validated
 public class ShopPageController {
 
     private final ShopPageQueryService shopPageQueryService;
@@ -35,7 +38,7 @@ public class ShopPageController {
     }
 
     @GetMapping("/active")
-    public List<ShopPageSimpleDto> getActiveShopPageSimples(@RequestBody List<Long> shopPageIds) {
+    public List<ShopPageSimpleDto> getActiveShopPageSimples(@NotEmpty @RequestBody final List<Long> shopPageIds) {
         return batchExcutable.execute(
                 batchSize,
                 shopPageIds,
@@ -43,7 +46,7 @@ public class ShopPageController {
     }
 
     @GetMapping("/inactive")
-    public List<ShopPageSimpleDto> getInactiveShopPageSimples(@RequestBody List<Long> shopPageIds) {
+    public List<ShopPageSimpleDto> getInactiveShopPageSimples(@NotEmpty @RequestBody final List<Long> shopPageIds) {
         return batchExcutable.execute(
                 batchSize,
                 shopPageIds,
@@ -51,7 +54,7 @@ public class ShopPageController {
     }
 
     @GetMapping("/{shopPageId}/detail")
-    public ShopPageDetailDto getShopPageDetail(@PathVariable Long shopPageId) {
+    public ShopPageDetailDto getShopPageDetail(@PathVariable("shopPageId") final Long shopPageId) {
         return shopPageQueryService.getShopPageDetail(shopPageId).orElse(null);
     }
 }
