@@ -1,0 +1,24 @@
+version: '2'
+
+services:
+  main_db:
+    image: 'postgres:15'
+    ports:
+      - "5433:5432"
+    environment:
+      - POSTGRES_DB=testdb
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=psql
+    # volumes:
+    #   - ./initdb:/docker-entrypoint-initdb.d
+
+    #   - POSTGRESQL_SHARED_PRELOAD_LIBRARIES=postgis-3
+    # command: 
+    #   - /bin/sh
+    #   - -c
+    #   - |
+    #     /opt/bitnami/scripts/postgresql/entrypoint.sh /opt/bitnami/scripts/postgresql/run.sh & 
+    #     sleep 10 &&
+    #     psql -U postgres -d testdb -c 'CREATE EXTENSION IF NOT EXISTS postgis;' &&
+    #     wait
+  

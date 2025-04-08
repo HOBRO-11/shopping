@@ -1,9 +1,0 @@
-rootProject.name = 'shopping'
-
-include 'modules:members',
-        'modules:orders',
-        'modules:sales',
-        'modules:locations',
-        'shopQuery',
-        'shopCommand'
-
