@@ -4,7 +4,7 @@ import com.hobro11.command.domain.orders.OptionQuantity;
 import com.hobro11.command.domain.orders.service.dto.CartCreateDto;
 import com.hobro11.command.domain.orders.service.dto.CartReadOnly;
 
-public interface CartWriter {
+public interface CartService {
 
     CartReadOnly findCartReadOnlyByMemberId(Long memberId);
 

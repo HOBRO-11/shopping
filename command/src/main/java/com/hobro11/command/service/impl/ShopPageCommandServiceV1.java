@@ -6,7 +6,7 @@ import java.net.URI;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.hobro11.command.domain.shop.ShopPageStatus;
-import com.hobro11.command.domain.shop.service.ShopPageWriter;
+import com.hobro11.command.domain.shop.service.ShopPageService;
 import com.hobro11.command.domain.shop.service.dto.ShopPageCreateDto;
 import com.hobro11.command.service.ShopPageCommandService;
 
@@ -16,35 +16,35 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ShopPageCommandServiceV1 implements ShopPageCommandService {
 
-    private final ShopPageWriter shopPageWriter;
+    private final ShopPageService shopPageService;
 
     @Override
     public Long createShopPage(ShopPageCreateDto dto) {
-        return shopPageWriter.createShopPage(dto);
+        return shopPageService.createShopPage(dto);
     }
 
     @Override
     public void checkTitle(String title) {
-        shopPageWriter.checkTitle(title);
+        shopPageService.checkTitle(title);
     }
 
     @Override
     public void updateThumbnailUri(Long id, URI thumbnailUri) {
-        shopPageWriter.updateThumbnailUri(id, thumbnailUri);
+        shopPageService.updateThumbnailUri(id, thumbnailUri);
     }
 
     @Override
     public void updateDescription(Long id, String description) {
-        shopPageWriter.updateDescription(id, description);
+        shopPageService.updateDescription(id, description);
     }
 
     @Override
     public void updateStatus(Long id, ShopPageStatus status) {
-        shopPageWriter.updateStatus(id, status);
+        shopPageService.updateStatus(id, status);
     }
 
     @Override
     public void deleteShopPage(Long id) {
-        shopPageWriter.deleteShopPage(id);
+        shopPageService.deleteShopPage(id);
     }
 }

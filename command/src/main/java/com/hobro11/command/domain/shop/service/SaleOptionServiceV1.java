@@ -18,7 +18,7 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class SaleOptionWriterV1 implements SaleOptionWriter {
+public class SaleOptionServiceV1 implements SaleOptionService {
 
     private final SaleOptionRepo saleOptionRepo;
     private final ShopPageRepo shopPageRepo;

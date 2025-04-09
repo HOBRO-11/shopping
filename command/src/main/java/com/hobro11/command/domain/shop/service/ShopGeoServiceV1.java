@@ -11,7 +11,7 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class ShopGeoWriterV1 implements ShopGeoWriter {
+public class ShopGeoServiceV1 implements ShopGeoService {
 
     private final ShopGeoRepo shopGeoRepo;
     private final GeoHashFuntion geoHashFuntion;

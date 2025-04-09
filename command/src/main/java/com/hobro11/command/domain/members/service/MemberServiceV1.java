@@ -14,7 +14,7 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class MemberWriterV1 implements MemberWriter {
+public class MemberServiceV1 implements MemberService {
 
     private final MemberRepo memberRepo;
 

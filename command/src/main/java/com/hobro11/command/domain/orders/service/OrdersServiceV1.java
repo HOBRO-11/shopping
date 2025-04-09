@@ -18,7 +18,7 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class OrdersWriterV1 implements OrdersWriter {
+public class OrdersServiceV1 implements OrdersService {
 
     private final OrdersRepo ordersRepo;
     private final OrdersProperties orderProperties;

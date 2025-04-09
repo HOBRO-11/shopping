@@ -16,7 +16,7 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class ShopPageWriterV1 implements ShopPageWriter {
+public class ShopPageServiceV1 implements ShopPageService {
 
     private final ShopPageRepo shopPageRepo;
 

@@ -5,7 +5,7 @@ import com.hobro11.command.domain.shop.SaleOptionStatus;
 import com.hobro11.command.domain.shop.service.dto.SaleOptionCreateDto;
 import com.hobro11.command.domain.shop.service.dto.SaleOptionReadOnly;
 
-public interface SaleOptionWriter {
+public interface SaleOptionService {
 
     SaleOptionReadOnly findSaleOptionReadOnlyById(Long id) throws SaleOptionNotFoundException;
 

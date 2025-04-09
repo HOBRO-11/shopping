@@ -15,7 +15,7 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class CartWriterV1 implements CartWriter {
+public class CartServiceV1 implements CartService {
 
     private final CartRepo cartRepo;
     private final OrdersProperties ordersProperties;

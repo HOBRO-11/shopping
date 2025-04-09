@@ -6,7 +6,7 @@ import com.hobro11.command.domain.shop.ShopPageStatus;
 import com.hobro11.command.domain.shop.service.dto.ShopPageCreateDto;
 import com.hobro11.command.domain.shop.service.dto.ShopPageReadOnly;
 
-public interface ShopPageWriter {
+public interface ShopPageService {
 
     ShopPageReadOnly findShopPageReadOnlyById(Long id);
 

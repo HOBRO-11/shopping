@@ -4,7 +4,7 @@ import com.hobro11.command.domain.members.MemberStatus;
 import com.hobro11.command.domain.members.service.dto.MemberCreateDto;
 import com.hobro11.command.domain.members.service.dto.MemberReadOnly;
 
-public interface MemberWriter {
+public interface MemberService {
 
     MemberReadOnly findMemberReadOnlyById(Long id);
 

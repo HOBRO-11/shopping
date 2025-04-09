@@ -5,7 +5,7 @@ import com.hobro11.command.core.exception.exceptions.OrdersNotFoundException;
 import com.hobro11.command.domain.orders.service.dto.OrdersCreateDto;
 import com.hobro11.command.domain.orders.service.dto.OrdersReadOnly;
 
-public interface OrdersWriter {
+public interface OrdersService {
 
     OrdersReadOnly findOrdersReadOnlyByOrderNumber(Long orderNumber) throws OrdersNotFoundException;
 

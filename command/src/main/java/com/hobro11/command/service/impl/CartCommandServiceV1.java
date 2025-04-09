@@ -7,10 +7,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.hobro11.command.domain.orders.OptionQuantity;
 import com.hobro11.command.core.exception.exceptions.CartNotFoundException;
-import com.hobro11.command.domain.orders.service.CartWriter;
+import com.hobro11.command.domain.orders.service.CartService;
 import com.hobro11.command.domain.orders.service.dto.CartCreateDto;
-import com.hobro11.command.domain.shop.service.SaleOptionWriter;
-import com.hobro11.command.domain.shop.service.ShopPageWriter;
+import com.hobro11.command.domain.shop.service.SaleOptionService;
+import com.hobro11.command.domain.shop.service.ShopPageService;
 import com.hobro11.command.domain.shop.service.dto.SaleOptionReadOnly;
 import com.hobro11.command.service.CartCommandService;
 
@@ -21,38 +21,38 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class CartCommandServiceV1 implements CartCommandService {
 
-    private final CartWriter cartWriter;
-    private final ShopPageWriter shopPageWriter;
-    private final SaleOptionWriter saleOptionWriter;
+    private final CartService cartService;
+    private final ShopPageService shopPageService;
+    private final SaleOptionService saleOptionService;
 
     @Override
     public void addSaleOptionAtCart(Long memberId, Long saleOptionId, int quantity) {
         Long cartId = 0L;
 
         try {
-            cartId = cartWriter.findCartReadOnlyByMemberId(memberId).getId();
+            cartId = cartService.findCartReadOnlyByMemberId(memberId).getId();
         } catch (CartNotFoundException e) {
-            cartId = cartWriter.createCart(new CartCreateDto(memberId));
+            cartId = cartService.createCart(new CartCreateDto(memberId));
         }
 
-        SaleOptionReadOnly saleOption = saleOptionWriter.findSaleOptionReadOnlyById(saleOptionId);
-        shopPageWriter.findShopPageReadOnlyById(saleOption.getShopPageId());
+        SaleOptionReadOnly saleOption = saleOptionService.findSaleOptionReadOnlyById(saleOptionId);
+        shopPageService.findShopPageReadOnlyById(saleOption.getShopPageId());
 
-        cartWriter.addOptionQuantity(cartId, new OptionQuantity(saleOptionId, quantity));
+        cartService.addOptionQuantity(cartId, new OptionQuantity(saleOptionId, quantity));
     }
 
     @Override
     public void removeSaleOptionAtCart(Long memberId, List<Long> saleOptionIds) {
-        Long cartId = cartWriter.findCartReadOnlyByMemberId(memberId).getId();
+        Long cartId = cartService.findCartReadOnlyByMemberId(memberId).getId();
         for (Long id : saleOptionIds) {
-            cartWriter.removeOptionQuantity(cartId, new OptionQuantity(id, 0));
+            cartService.removeOptionQuantity(cartId, new OptionQuantity(id, 0));
         }
     }
 
     @Override
     public void deleteCartByMemberId(Long memberId) {
-        Long cartId = cartWriter.findCartReadOnlyByMemberId(memberId).getId();
-        cartWriter.deleteCart(cartId);
+        Long cartId = cartService.findCartReadOnlyByMemberId(memberId).getId();
+        cartService.deleteCart(cartId);
     }
 
 }

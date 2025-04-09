@@ -12,11 +12,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.hobro11.command.domain.orders.OptionQuantity;
 import com.hobro11.command.domain.orders.OrdersStatus;
-import com.hobro11.command.domain.orders.service.OrdersWriter;
+import com.hobro11.command.domain.orders.service.OrdersService;
 import com.hobro11.command.domain.orders.service.dto.OrdersCreateDto;
 import com.hobro11.command.domain.orders.service.dto.OrdersReadOnly;
 import com.hobro11.command.domain.shop.SaleOptionStatus;
-import com.hobro11.command.domain.shop.service.SaleOptionWriter;
+import com.hobro11.command.domain.shop.service.SaleOptionService;
 import com.hobro11.command.domain.shop.service.dto.SaleOptionReadOnly;
 import com.hobro11.command.service.OrdersCommandService;
 
@@ -27,13 +27,13 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class OrdersCommandServiceV1 implements OrdersCommandService {
 
-    private final OrdersWriter ordersWriter;
-    private final SaleOptionWriter saleOptionWriter;
+    private final OrdersService ordersService;
+    private final SaleOptionService saleOptionService;
 
     @Override
     public Long createOrder(OrdersCreateDto dto) {
         checkAndPrice(dto);
-        return ordersWriter.createOrders(dto);
+        return ordersService.createOrders(dto);
     }
 
     private void checkAndPrice(OrdersCreateDto dto) {
@@ -42,7 +42,7 @@ public class OrdersCommandServiceV1 implements OrdersCommandService {
         int result = 0;
         for (OptionQuantity oq : optionQuantities) {
             Long saleOptionId = oq.getSaleOptionId();
-            SaleOptionReadOnly saleOption = saleOptionWriter.findSaleOptionReadOnlyById(saleOptionId);
+            SaleOptionReadOnly saleOption = saleOptionService.findSaleOptionReadOnlyById(saleOptionId);
             if (saleOption.getStatus() == SaleOptionStatus.SOLD_OUT
                     || saleOption.getStatus() == SaleOptionStatus.INACTIVE) {
                 throw new IllegalStateException("this sale option is not available");
@@ -57,9 +57,9 @@ public class OrdersCommandServiceV1 implements OrdersCommandService {
 
     @Override
     public void updateStatus(Long orderNumber, OrdersStatus status) {
-        OrdersReadOnly orders = ordersWriter.findOrdersReadOnlyByOrderNumber(orderNumber);
+        OrdersReadOnly orders = ordersService.findOrdersReadOnlyByOrderNumber(orderNumber);
         checkStatusChangeable(orders, status);
-        ordersWriter.updateStatus(orderNumber, status);
+        ordersService.updateStatus(orderNumber, status);
     }
 
     private void checkStatusChangeable(OrdersReadOnly orders, OrdersStatus status) {
@@ -78,10 +78,10 @@ public class OrdersCommandServiceV1 implements OrdersCommandService {
 
     @Override
     public void updateCheckSum(Long orderNumber, Long saleOptionId, int quantity) {
-        OrdersReadOnly orders = ordersWriter.findOrdersReadOnlyByOrderNumber(orderNumber);
+        OrdersReadOnly orders = ordersService.findOrdersReadOnlyByOrderNumber(orderNumber);
         checkOptionQuantity(orders, saleOptionId, quantity);
         Long checkSum = getCheckSumWithSaleOption(saleOptionId, quantity);
-        ordersWriter.updateCheckSum(orderNumber, checkSum);
+        ordersService.updateCheckSum(orderNumber, checkSum);
     }
 
     private void checkOptionQuantity(OrdersReadOnly orders, Long saleOptionId, int quantity) {
@@ -96,12 +96,12 @@ public class OrdersCommandServiceV1 implements OrdersCommandService {
     }
 
     private Long getCheckSumWithSaleOption(Long saleOptionId, int quantity) {
-        SaleOptionReadOnly saleOption = saleOptionWriter.findSaleOptionReadOnlyById(saleOptionId);
+        SaleOptionReadOnly saleOption = saleOptionService.findSaleOptionReadOnlyById(saleOptionId);
         return saleOption.getPrice() * quantity;
     }
 
     @Override
     public void deleteOrders(Long orderNumber) {
-        ordersWriter.deleteOrders(orderNumber);
+        ordersService.deleteOrders(orderNumber);
     }
 }
