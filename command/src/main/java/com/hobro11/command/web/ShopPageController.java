@@ -1,4 +1,4 @@
-package com.hobro11.command.controller;
+package com.hobro11.command.web;
 
 import java.net.URI;
 
@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.hobro11.command.controller.form.ShopPageCreateForm;
 import com.hobro11.command.domain.shop.ShopPageStatus;
 import com.hobro11.command.service.ShopPageCommandService;
+import com.hobro11.command.web.form.ShopPageCreateForm;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;

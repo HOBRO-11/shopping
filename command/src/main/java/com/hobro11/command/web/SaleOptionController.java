@@ -1,4 +1,4 @@
-package com.hobro11.command.controller;
+package com.hobro11.command.web;
 
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.hobro11.command.controller.form.SaleOptionCreateForm;
 import com.hobro11.command.domain.shop.SaleOptionStatus;
 import com.hobro11.command.service.SaleOptionCommandService;
+import com.hobro11.command.web.form.SaleOptionCreateForm;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;

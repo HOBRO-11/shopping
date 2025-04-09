@@ -1,4 +1,4 @@
-package com.hobro11.command.core.provider.impl;
+package com.hobro11.command.core.client.impl;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,8 +14,8 @@ import org.springframework.web.client.RestTemplate;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.hobro11.command.core.provider.Coordinate;
-import com.hobro11.command.core.provider.GeoDataProvider;
+import com.hobro11.command.core.client.Coordinate;
+import com.hobro11.command.core.client.GeoDataClient;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,7 +23,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class GeoProviderKakao implements GeoDataProvider {
+public class GeoDataClientKakao implements GeoDataClient {
 
     @Value("${kakao.api-key}")
     private String apiKey;

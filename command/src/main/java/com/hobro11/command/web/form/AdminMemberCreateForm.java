@@ -1,4 +1,4 @@
-package com.hobro11.command.controller.form;
+package com.hobro11.command.web.form;
 
 import com.hobro11.command.domain.members.MemberRole;
 import com.hobro11.command.domain.members.service.dto.MemberCreateDto;
@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class BasicMemberCreateForm {
+public class AdminMemberCreateForm {
 
     @NotBlank(message = "{memberCreateForm.name.notBlank}")
     private String name;
@@ -22,7 +22,6 @@ public class BasicMemberCreateForm {
     private String phone;
 
     public MemberCreateDto toDto() {
-        return new MemberCreateDto(null, name, phone, MemberRole.BASIC);
+        return new MemberCreateDto(null, name, phone, MemberRole.ADMIN);
     }
-
 }

@@ -1,8 +1,8 @@
-package com.hobro11.command.core.provider;
+package com.hobro11.command.core.client;
 
 import java.util.Map;
 
-public interface GeoDataProvider {
+public interface GeoDataClient {
 
     /**
      * 주소를 기반으로 Map<우편번호, 좌표>를 찾는 메서드

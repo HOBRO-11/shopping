@@ -1,4 +1,4 @@
-package com.hobro11.command.core.provider;
+package com.hobro11.command.core.client;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,4 +1,4 @@
-package com.hobro11.command.controller;
+package com.hobro11.command.web;
 
 import java.util.List;
 

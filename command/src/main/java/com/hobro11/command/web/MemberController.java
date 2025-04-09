@@ -1,4 +1,4 @@
-package com.hobro11.command.controller;
+package com.hobro11.command.web;
 
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.hobro11.command.controller.form.AdminMemberCreateForm;
-import com.hobro11.command.controller.form.BasicMemberCreateForm;
-import com.hobro11.command.controller.form.BusinessMemberCreateForm;
 import com.hobro11.command.core.validate.Phone;
 import com.hobro11.command.domain.members.MemberStatus;
 import com.hobro11.command.service.MemberCommandService;
+import com.hobro11.command.web.form.AdminMemberCreateForm;
+import com.hobro11.command.web.form.BasicMemberCreateForm;
+import com.hobro11.command.web.form.BusinessMemberCreateForm;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;

@@ -1,4 +1,4 @@
-package com.hobro11.command.controller;
+package com.hobro11.command.web;
 
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.hobro11.command.controller.form.OrdersCreateForm;
 import com.hobro11.command.domain.orders.OrdersStatus;
 import com.hobro11.command.service.OrdersCommandService;
+import com.hobro11.command.web.form.OrdersCreateForm;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;

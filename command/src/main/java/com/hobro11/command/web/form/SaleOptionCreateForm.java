@@ -1,4 +1,4 @@
-package com.hobro11.command.controller.form;
+package com.hobro11.command.web.form;
 
 import com.hobro11.command.domain.shop.SaleOptionStatus;
 import com.hobro11.command.domain.shop.service.dto.SaleOptionCreateDto;

@@ -5,8 +5,8 @@ import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
-import com.hobro11.command.core.provider.Coordinate;
-import com.hobro11.command.core.provider.GeoDataProvider;
+import com.hobro11.command.core.client.Coordinate;
+import com.hobro11.command.core.client.GeoDataClient;
 import com.hobro11.command.domain.shop.ShopPageStatus;
 import com.hobro11.command.domain.shop.service.ShopGeoWriter;
 import com.hobro11.command.domain.shop.service.ShopPageWriter;
@@ -24,7 +24,7 @@ public class ShopPageCommandServiceV2 implements ShopPageCommandService {
 
     private final ShopPageWriter shopPageWriter;
     private final ShopGeoWriter shopGeoWriter;
-    private final GeoDataProvider geoDataProvider;
+    private final GeoDataClient geoDataProvider;
 
     @Override
     public Long createShopPage(ShopPageCreateDto dto) {

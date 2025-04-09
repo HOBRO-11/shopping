@@ -1,4 +1,4 @@
-package com.hobro11.command.controller.form;
+package com.hobro11.command.web.form;
 
 import com.hobro11.command.domain.members.MemberRole;
 import com.hobro11.command.domain.members.service.dto.MemberCreateDto;
