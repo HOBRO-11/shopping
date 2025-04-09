@@ -42,7 +42,7 @@ public class CartServiceV1 implements CartService {
             if (cart.getOptionQuantities().size() >= maxCount) {
                 throw new CartMaxCountExceededException();
             }
-
+            cart.removeOptionQuantity(optionQuantity);
             cart.addOptionQuantity(optionQuantity);
             cartRepo.save(cart);
         });
