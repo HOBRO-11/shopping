@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f4f4f4;
+        }
+        .login-container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+        }
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .error-message {
+            color: red;
+            margin-top: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Login</h2>
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="button" onclick="submitLogin()">Login</button>
+            <div id="errorMessage" class="error-message" style="display: none;"></div>
+        </form>
+    </div>
+
+    <script>
+        function submitLogin() {
+            const form = document.getElementById('loginForm');
+            const username = form.username.value;
+            const password = form.password.value;
+            const errorMessageDiv = document.getElementById('errorMessage');
+
+            const loginData = {
+                username: username,
+                password: password
+            };
+
+            fetch('/api/auth/login-process', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(loginData)
+            })
+            .then(response => {
+                if (response.ok) {
+                    // 로그인 성공 시 리다이렉트 처리 (서버에서 리다이렉트 응답을 보내는 경우)
+                    window.location.href = '/';
+                } else {
+                    // 로그인 실패 시 에러 메시지 표시
+                    return response.json().then(data => {
+                        errorMessageDiv.textContent = data.message || 'Login failed. Please check your credentials.';
+                        errorMessageDiv.style.display = 'block';
+                    });
+                }
+            })
+            .catch(error => {
+                console.error('Login request failed:', error);
+                errorMessageDiv.textContent = 'Network error occurred.';
+                errorMessageDiv.style.display = 'block';
+            });
+        }
+    </script>
+</body>
+</html>

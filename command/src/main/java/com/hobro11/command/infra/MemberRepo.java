@@ -16,4 +16,6 @@ public interface MemberRepo extends JpaRepository<Member, Long> {
     boolean existsByBrn(Long brn);
 
     Optional<MemberReadOnly> findMemberReadOnlyById(Long id);
+
+    Optional<MemberReadOnly> findMemberReadOnlyByName(String name);
 }

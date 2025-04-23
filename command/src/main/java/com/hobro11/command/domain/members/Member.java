@@ -8,6 +8,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Index;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
@@ -23,7 +24,9 @@ import lombok.ToString;
 @Entity
 @Getter
 @ToString
-@Table(name = "member", uniqueConstraints = @UniqueConstraint(columnNames = { "brn" }))
+@Table(name = "member", uniqueConstraints = {
+        @UniqueConstraint(columnNames = { "brn" }),
+        @UniqueConstraint(columnNames = { "name" }) }, indexes = { @Index(columnList = "name") })
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @EqualsAndHashCode
 public class Member {

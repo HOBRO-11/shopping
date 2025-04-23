@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome!</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f0f8ff; /* 연한 파란색 배경 */
+            margin: 0;
+        }
+        .welcome-container {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        h1 {
+            color: #007bff; /* 파란색 제목 */
+            margin-bottom: 20px;
+        }
+        p {
+            color: #555;
+            margin-bottom: 30px;
+        }
+        .button-container a {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: #28a745; /* 녹색 버튼 */
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        .button-container a:hover {
+            background-color: #1e7e34;
+        }
+        .button-container a + a {
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="welcome-container">
+        <h1>Welcome!</h1>
+        <p>You have successfully logged in.</p>
+        <div class="button-container">
+            <a href="/">Go to Homepage</a>
+            <a href="/logout">Logout</a> </div>
+    </div>
+</body>
+</html>

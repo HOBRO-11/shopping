@@ -19,6 +19,12 @@ public class MemberServiceV1 implements MemberService {
     private final MemberRepo memberRepo;
 
     @Override
+    public MemberReadOnly findMemberReadOnlyByName(String name) {
+        return memberRepo.findMemberReadOnlyByName(name)
+                .orElseThrow(() -> new MemberNotFoundException());
+    }
+
+    @Override
     public MemberReadOnly findMemberReadOnlyById(Long id) {
         return memberRepo.findMemberReadOnlyById(id)
                 .orElseThrow(() -> new MemberNotFoundException());

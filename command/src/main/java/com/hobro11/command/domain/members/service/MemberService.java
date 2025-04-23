@@ -6,6 +6,8 @@ import com.hobro11.command.domain.members.service.dto.MemberReadOnly;
 
 public interface MemberService {
 
+    MemberReadOnly findMemberReadOnlyByName(String name);
+
     MemberReadOnly findMemberReadOnlyById(Long id);
 
     Long createMember(MemberCreateDto dto);
