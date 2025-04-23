@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.hobro11.command.core.validate.Phone;
 import com.hobro11.command.domain.members.MemberStatus;
+import com.hobro11.command.security.aop.PreAuthCheck;
 import com.hobro11.command.service.MemberCommandService;
 import com.hobro11.command.web.form.AdminMemberCreateForm;
 import com.hobro11.command.web.form.BasicMemberCreateForm;
@@ -52,6 +53,7 @@ public class MemberController {
     }
 
     @PatchMapping("/{memberId}/name")
+    @PreAuthCheck(memberIdParam = "memberId")
     public void updateName(
             @PathVariable("memberId") final Long memberId,
             @NotBlank @RequestBody final String name) {
@@ -59,6 +61,7 @@ public class MemberController {
     }
 
     @PatchMapping("/{memberId}/phone")
+    @PreAuthCheck(memberIdParam = "memberId")
     public void updatePhone(
             @PathVariable("memberId") final Long memberId,
             @Phone @RequestBody final String phone) {
@@ -66,6 +69,7 @@ public class MemberController {
     }
 
     @PatchMapping("/{memberId}/status")
+    @PreAuthCheck(memberIdParam = "memberId")
     public void updateStatus(
             @PathVariable("memberId") final Long memberId,
             @NotNull @RequestParam("status") final MemberStatus status) {
