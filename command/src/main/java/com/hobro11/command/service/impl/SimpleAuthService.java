@@ -43,13 +43,13 @@ public class SimpleAuthService implements AuthService {
 
     @Override
     public ResponseCookie generateAccessToken(MemberReadOnly member) {
-        String token = jwtTokenProvider.generateToken(member.getName(), member.getRole().name(), false);
+        String token = jwtTokenProvider.generateToken(member.getId().toString(), member.getRole().name(), false);
         return getCookie(token, false);
     }
 
     @Override
     public ResponseCookie generateRefreshToken(MemberReadOnly member) {
-        String token = jwtTokenProvider.generateToken(member.getName(), member.getRole().name(), true);
+        String token = jwtTokenProvider.generateToken(member.getId().toString(), member.getRole().name(), true);
         return getCookie(token, true);
     }
 
@@ -75,7 +75,7 @@ public class SimpleAuthService implements AuthService {
         String name = isRefreshToken ? refreshTokenName : accessTokenName;
         String path = isRefreshToken ? refreshTokenPath : accessTokenPath;
         int expiration = isRefreshToken ? refreshTokenExpiration : accessTokenExpiration;
-        
+
         return ResponseCookie
                 .from(name, newToken)
                 .domain("localhost")
