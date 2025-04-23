@@ -2,6 +2,7 @@ package com.hobro11.command.web;
 
 import java.net.URI;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -27,15 +28,18 @@ import lombok.RequiredArgsConstructor;
 public class ShopPageController {
 
     private final ShopPageCommandService shopPageCommandService;
+    private static final String AUTH_CHECK_EX = "@shopPageAuthHandler.check(#shopPageId)";
 
     // TODO: create thumbnailUri, location service
     @PostMapping
+    @PreAuthorize(AUTH_CHECK_EX)
     public Long createShopPage(@Valid @RequestBody final ShopPageCreateForm form) {
         URI thumbnailUri = null;
         return shopPageCommandService.createShopPage(form.toDto(thumbnailUri));
     }
 
     @PatchMapping("/{shopPageId}/status")
+    @PreAuthorize(AUTH_CHECK_EX)
     public void updateStatus(
             @PathVariable("shopPageId") final Long shopPageId,
             @NotNull @RequestParam("status") final ShopPageStatus status) {
@@ -44,6 +48,7 @@ public class ShopPageController {
 
     // TODO: create thumbnailUri
     @PatchMapping("/{shopPageId}/thumbnailUri")
+    @PreAuthorize(AUTH_CHECK_EX)
     public void updateThumbnailUri(
             @PathVariable("shopPageId") final Long shopPageId,
             @NotNull @RequestParam("thumbnailUri") final URI thumbnailUri) {
@@ -51,6 +56,7 @@ public class ShopPageController {
     }
 
     @PatchMapping("/{shopPageId}/description")
+    @PreAuthorize(AUTH_CHECK_EX)
     public void updateDescription(
             @PathVariable("shopPageId") final Long shopPageId,
             @NotNull @RequestParam("description") final String description) {
@@ -58,6 +64,7 @@ public class ShopPageController {
     }
 
     @DeleteMapping("/{shopPageId}")
+    @PreAuthorize(AUTH_CHECK_EX)
     public void deleteShopPage(@PathVariable("shopPageId") final Long shopPageId) {
         shopPageCommandService.deleteShopPage(shopPageId);
     }

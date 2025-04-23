@@ -1,5 +1,6 @@
 package com.hobro11.command.web;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -26,13 +27,16 @@ import lombok.RequiredArgsConstructor;
 public class OrdersController {
 
     private final OrdersCommandService ordersCommandService;
+    private static final String AUTH_CHECK_EX = "@cartAuthHandler.check(#memberId)";
 
     @PostMapping
+    @PreAuthorize(AUTH_CHECK_EX)
     public Long createOrder(@Valid @RequestBody final OrdersCreateForm form) {
         return ordersCommandService.createOrder(form.toDto());
     }
 
     @PatchMapping("/{orderNumber}/status")
+    @PreAuthorize(AUTH_CHECK_EX)
     public void updateStatus(
             @PathVariable("orderNumber") final Long orderNumber,
             @NotNull @RequestParam("status") final OrdersStatus status) {
@@ -40,6 +44,7 @@ public class OrdersController {
     }
 
     @PatchMapping("/{orderNumber}/checkSum")
+    @PreAuthorize(AUTH_CHECK_EX)
     public void updateCheckSum(@PathVariable("orderNumber") final Long orderNumber,
             @NotNull @RequestParam("saleOptionId") final Long saleOptionId,
             @Positive @RequestParam("quantity") final Integer quantity) {
@@ -47,6 +52,7 @@ public class OrdersController {
     }
 
     @DeleteMapping("/{orderNumber}")
+    @PreAuthorize(AUTH_CHECK_EX)
     public void deleteOrders(@PathVariable("orderNumber") final Long orderNumber) {
         ordersCommandService.deleteOrders(orderNumber);
     }

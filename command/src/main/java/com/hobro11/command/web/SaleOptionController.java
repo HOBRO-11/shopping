@@ -1,5 +1,6 @@
 package com.hobro11.command.web;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,13 +25,16 @@ import lombok.RequiredArgsConstructor;
 public class SaleOptionController {
 
     private final SaleOptionCommandService saleOptionCommandService;
+    private static final String AUTH_CHECK_EX = "@saleOptionAuthHandler.check(#saleOptionId)";
 
     @PostMapping
+    @PreAuthorize(AUTH_CHECK_EX)
     public Long createSaleOption(@Valid @RequestBody final SaleOptionCreateForm form) {
         return saleOptionCommandService.createSaleOption(form.toDto());
     }
 
     @PatchMapping("/{saleOptionId}/status")
+    @PreAuthorize(AUTH_CHECK_EX)
     public void updateStatus(
             @PathVariable("saleOptionId") final Long saleOptionId,
             @NotNull @RequestParam("status") final SaleOptionStatus status) {
